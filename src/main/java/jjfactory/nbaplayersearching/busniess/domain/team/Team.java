@@ -1,4 +1,4 @@
-package jjfactory.nbaplayersearching.busniess.domain.player;
+package jjfactory.nbaplayersearching.busniess.domain.team;
 
 import lombok.AccessLevel;
 import lombok.Builder;

@@ -1,6 +1,7 @@
 package jjfactory.nbaplayersearching.busniess.domain.player;
 
 import jjfactory.nbaplayersearching.busniess.domain.BaseTimeEntity;
+import jjfactory.nbaplayersearching.busniess.domain.team.Team;
 import jjfactory.nbaplayersearching.busniess.request.PlayerCreate;
 import lombok.AccessLevel;
 import lombok.Builder;

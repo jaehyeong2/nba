@@ -1,6 +1,6 @@
-package jjfactory.nbaplayersearching.busniess.repository;
+package jjfactory.nbaplayersearching.busniess.repository.team;
 
-import jjfactory.nbaplayersearching.busniess.domain.player.Team;
+import jjfactory.nbaplayersearching.busniess.domain.team.Team;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

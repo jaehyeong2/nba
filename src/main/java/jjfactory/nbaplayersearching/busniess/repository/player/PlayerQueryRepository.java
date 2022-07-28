@@ -1,4 +1,4 @@
-package jjfactory.nbaplayersearching.busniess.repository;
+package jjfactory.nbaplayersearching.busniess.repository.player;
 
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;

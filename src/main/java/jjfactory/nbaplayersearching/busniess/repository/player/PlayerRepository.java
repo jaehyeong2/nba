@@ -1,4 +1,4 @@
-package jjfactory.nbaplayersearching.busniess.repository;
+package jjfactory.nbaplayersearching.busniess.repository.player;
 
 import jjfactory.nbaplayersearching.busniess.domain.player.Player;
 import org.springframework.data.jpa.repository.JpaRepository;

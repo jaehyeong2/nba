@@ -2,9 +2,9 @@ package jjfactory.nbaplayersearching.busniess.service;
 
 import jjfactory.nbaplayersearching.busniess.domain.DeleteStatus;
 import jjfactory.nbaplayersearching.busniess.domain.player.Player;
-import jjfactory.nbaplayersearching.busniess.domain.player.Team;
-import jjfactory.nbaplayersearching.busniess.repository.PlayerRepository;
-import jjfactory.nbaplayersearching.busniess.repository.TeamRepository;
+import jjfactory.nbaplayersearching.busniess.domain.team.Team;
+import jjfactory.nbaplayersearching.busniess.repository.player.PlayerRepository;
+import jjfactory.nbaplayersearching.busniess.repository.team.TeamRepository;
 import jjfactory.nbaplayersearching.busniess.response.PlayerDetailRes;
 import jjfactory.nbaplayersearching.busniess.response.PlayerRes;
 import org.junit.jupiter.api.DisplayName;
@@ -19,7 +19,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 
 @Transactional
