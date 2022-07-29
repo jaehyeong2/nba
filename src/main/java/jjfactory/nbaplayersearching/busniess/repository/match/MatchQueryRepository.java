@@ -3,7 +3,6 @@ package jjfactory.nbaplayersearching.busniess.repository.match;
 import com.querydsl.core.Tuple;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import jjfactory.nbaplayersearching.busniess.domain.player.QMatch;
 import jjfactory.nbaplayersearching.busniess.response.MatchRes;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -14,7 +13,8 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-import static jjfactory.nbaplayersearching.busniess.domain.player.QMatch.*;
+import static jjfactory.nbaplayersearching.busniess.domain.match.QMatch.match;
+
 
 @RequiredArgsConstructor
 @Repository

@@ -33,10 +33,12 @@ public class Player extends BaseTimeEntity {
     private int uniformNumber;
 
     @Enumerated(EnumType.STRING)
-    private Position position;
+    private Country country;
 
+    @Enumerated(EnumType.STRING)
+    private Position position;
     @Builder
-    public Player(Team team, String name, int age, int height, int weight, String birth, int uniformNumber, Position position) {
+    public Player(Team team, String name, int age, int height, int weight, String birth, int uniformNumber, Country country, Position position) {
         this.team = team;
         this.name = name;
         this.age = age;
@@ -44,8 +46,11 @@ public class Player extends BaseTimeEntity {
         this.weight = weight;
         this.birth = birth;
         this.uniformNumber = uniformNumber;
+        this.country = country;
         this.position = position;
     }
+
+
 
     public static Player create(PlayerCreate dto, Team team){
         return Player.builder()
@@ -54,6 +59,7 @@ public class Player extends BaseTimeEntity {
                 .team(team)
                 .height(dto.getHeight())
                 .weight(dto.getWeight())
+                .country(dto.getCountry())
                 .build();
     }
 }

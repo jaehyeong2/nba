@@ -1,5 +1,6 @@
 package jjfactory.nbaplayersearching.busniess.request;
 
+import jjfactory.nbaplayersearching.busniess.domain.player.Country;
 import jjfactory.nbaplayersearching.busniess.domain.player.Player;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -15,6 +16,7 @@ public class PlayerCreate {
     private int height;
     private int weight;
     private String birth;
+    private Country country;
 
     public PlayerCreate(Player player) {
         this.name = player.getName();
@@ -22,5 +24,6 @@ public class PlayerCreate {
         this.height = player.getHeight();
         this.weight = player.getWeight();
         this.birth = player.getBirth();
+        this.country = player.getCountry();
     }
 }

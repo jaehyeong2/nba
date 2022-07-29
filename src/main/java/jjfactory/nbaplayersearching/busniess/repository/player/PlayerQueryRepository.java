@@ -4,7 +4,7 @@ import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import jjfactory.nbaplayersearching.busniess.domain.player.Player;
 import jjfactory.nbaplayersearching.busniess.domain.player.QPlayer;
-import jjfactory.nbaplayersearching.busniess.domain.player.QTeam;
+//import jjfactory.nbaplayersearching.busniess.domain.player.QTeam;
 import jjfactory.nbaplayersearching.busniess.response.PlayerRes;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -15,7 +15,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 import static jjfactory.nbaplayersearching.busniess.domain.player.QPlayer.*;
-import static jjfactory.nbaplayersearching.busniess.domain.player.QTeam.*;
+//import static jjfactory.nbaplayersearching.busniess.domain.player.QTeam.*;
 
 @RequiredArgsConstructor
 @Repository
