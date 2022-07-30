@@ -8,10 +8,7 @@ import jjfactory.nbaplayersearching.busniess.domain.team.Team;
 import jjfactory.nbaplayersearching.busniess.repository.match.MatchRepository;
 import jjfactory.nbaplayersearching.busniess.repository.player.PlayerRepository;
 import jjfactory.nbaplayersearching.busniess.repository.team.TeamRepository;
-import jjfactory.nbaplayersearching.busniess.response.PlayerRes;
 import jjfactory.nbaplayersearching.busniess.response.ReboundRes;
-import net.bytebuddy.utility.nullability.AlwaysNull;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +19,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
 
 @Transactional
 @SpringBootTest
@@ -58,7 +54,7 @@ class ReboundQueryRepositoryTest {
         playerRepository.save(test1);
         playerRepository.save(test2);
 
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 15; i++) {
             Rebound d = Rebound.builder().reboundType(ReboundType.DEFENSE).player(test1).match(match).build();
             Rebound o = Rebound.builder().reboundType(ReboundType.OFFENSE).player(test2).match(match2).build();
             reboundRepository.save(d);
@@ -67,11 +63,48 @@ class ReboundQueryRepositoryTest {
         Pageable pageRequest = PageRequest.of(1, 10);
 
         //when
-        Page<ReboundRes> reboundsInMatch = reboundQueryRepository.findReboundsInMatch(pageRequest, match.getId());
+        Page<ReboundRes> reboundsInMatch = reboundQueryRepository.findReboundsInMatch(pageRequest, match.getId(),null);
 
         //then
-        assertThat(reboundsInMatch.getTotalPages()).isEqualTo(1);
-        assertThat(reboundsInMatch.getTotalElements()).isEqualTo(10);
+        assertThat(reboundsInMatch.getTotalPages()).isEqualTo(2);
+        assertThat(reboundsInMatch.getTotalElements()).isEqualTo(15);
+    }
+
+    @Test
+    @DisplayName("한경기 한 플레이어 리바운드 셀렉트 테스트")
+    void findReboundsOfPlayerInMatch() {
+        //given
+        Team teamA = Team.builder().name("teamA").build();
+        Team teamB = Team.builder().name("teamB").build();
+        teamRepository.save(teamA);
+        teamRepository.save(teamB);
+
+        Match match = Match.builder().homeTeam(teamA).awayTeam(teamB).build();
+        Match match2 = Match.builder().homeTeam(teamA).awayTeam(teamB).build();
+        matchRepository.save(match);
+        matchRepository.save(match2);
+
+        Player test1 = Player.builder().name("test").build();
+        Player test2 = Player.builder().name("test2").build();
+        playerRepository.save(test1);
+        playerRepository.save(test2);
+
+        for (int i = 0; i < 15; i++) {
+            Rebound d = Rebound.builder().reboundType(ReboundType.DEFENSE).player(test1).match(match).build();
+            reboundRepository.save(d);
+        }
+        Pageable pageRequest = PageRequest.of(1, 10);
+
+        //when
+        Page<ReboundRes> reboundOfTest1 = reboundQueryRepository.findReboundsInMatch(pageRequest, match.getId(),"test");
+        Page<ReboundRes> reboundOfTest2 = reboundQueryRepository.findReboundsInMatch(pageRequest, match.getId(),"test2");
+
+        //then
+        assertThat(reboundOfTest1.getTotalPages()).isEqualTo(2);
+        assertThat(reboundOfTest1.getTotalElements()).isEqualTo(15);
+
+        assertThat(reboundOfTest2.getTotalPages()).isEqualTo(0);
+        assertThat(reboundOfTest2.getTotalElements()).isEqualTo(0);
     }
 
     @Test
