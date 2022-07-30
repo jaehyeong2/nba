@@ -36,15 +36,14 @@ public class ReboundQueryRepository{
         return new PageImpl<>(reboundResList,pageable,total);
     }
 
-    public int countOffenseRebound(){
+    public int countReboundByType(ReboundType type){
         return queryFactory.selectFrom(rebound)
-                .where(rebound.reboundType.eq(ReboundType.OFFENSE))
+                .where(rebound.reboundType.eq(type))
                 .fetch().size();
     }
 
-    public int countDefenseRebound(){
+    public int countSeasonTotalRebound(){
         return queryFactory.selectFrom(rebound)
-                .where(rebound.reboundType.eq(ReboundType.DEFENSE))
                 .fetch().size();
     }
 }

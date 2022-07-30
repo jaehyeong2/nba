@@ -5,6 +5,7 @@ import jjfactory.nbaplayersearching.busniess.domain.BaseTimeEntity;
 import jjfactory.nbaplayersearching.busniess.domain.match.Match;
 import jjfactory.nbaplayersearching.busniess.domain.player.Player;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -27,4 +28,11 @@ public class Rebound extends BaseTimeEntity {
     private Match match;
 
     private ReboundType reboundType;
+
+    @Builder
+    public Rebound(Player player, Match match, ReboundType reboundType) {
+        this.player = player;
+        this.match = match;
+        this.reboundType = reboundType;
+    }
 }

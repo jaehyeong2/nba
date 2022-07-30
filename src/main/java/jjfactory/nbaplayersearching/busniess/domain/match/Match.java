@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
+@Table(name = "matches")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Entity
@@ -18,6 +19,7 @@ public class Match extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "match_id")
     private Long id;
 
     @JoinColumn(name = "home_id")
@@ -51,8 +53,8 @@ public class Match extends BaseTimeEntity {
 
     public static Match create(MatchCreate dto,Team home,Team away){
         return Match.builder()
-                .awayTeam(away)
                 .homeTeam(home)
+                .awayTeam(away)
                 .matchTime(dto.getMatchTime())
                 .location(dto.getLocation())
                 .firstQtScore(dto.getFirstQtScore())
