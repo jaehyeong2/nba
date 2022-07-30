@@ -7,6 +7,8 @@ import jjfactory.nbaplayersearching.busniess.repository.match.MatchRepository;
 import jjfactory.nbaplayersearching.busniess.repository.team.TeamRepository;
 import jjfactory.nbaplayersearching.busniess.request.MatchCreate;
 import jjfactory.nbaplayersearching.busniess.response.MatchRes;
+import jjfactory.nbaplayersearching.global.handler.ex.BusinessException;
+import jjfactory.nbaplayersearching.global.handler.ex.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -36,11 +38,14 @@ public class MatchService {
         return matchQueryRepository.findMatches(pageable);
     }
 
-    public String create(MatchCreate dto,Long homeId, Long awayId){
-        Team home = getTeam(homeId);
-        Team away = getTeam(awayId);
+    public String create(MatchCreate dto){
+        Team home = getTeam(dto.getHomeTeamId());
+        Team away = getTeam(dto.getAwayTeamId());
 
-        Match.create(dto,home,away);
+        if (home.getId() == away.getId()) throw new BusinessException(ErrorCode.INVALID_TEAm_ID);
+
+        Match match = Match.create(dto, home, away);
+        matchRepository.save(match);
         return "Y";
     }
 

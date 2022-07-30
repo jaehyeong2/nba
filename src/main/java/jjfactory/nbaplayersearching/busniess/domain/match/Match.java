@@ -30,6 +30,10 @@ public class Match extends BaseTimeEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     private Team awayTeam;
 
+    @JoinColumn(name = "season_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Season season;
+
     private String location;
 
     private LocalDateTime matchTime;

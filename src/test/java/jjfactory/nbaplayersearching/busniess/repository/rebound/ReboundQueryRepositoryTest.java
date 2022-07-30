@@ -49,7 +49,9 @@ class ReboundQueryRepositoryTest {
         teamRepository.save(teamB);
 
         Match match = Match.builder().homeTeam(teamA).awayTeam(teamB).build();
+        Match match2 = Match.builder().homeTeam(teamA).awayTeam(teamB).build();
         matchRepository.save(match);
+        matchRepository.save(match2);
 
         Player test1 = Player.builder().name("test").build();
         Player test2 = Player.builder().name("test2").build();
@@ -57,19 +59,19 @@ class ReboundQueryRepositoryTest {
         playerRepository.save(test2);
 
         for (int i = 0; i < 10; i++) {
-            Rebound d = Rebound.builder().reboundType(ReboundType.DEFENSE).player(test1).build();
-            Rebound o = Rebound.builder().reboundType(ReboundType.OFFENSE).player(test2).build();
+            Rebound d = Rebound.builder().reboundType(ReboundType.DEFENSE).player(test1).match(match).build();
+            Rebound o = Rebound.builder().reboundType(ReboundType.OFFENSE).player(test2).match(match2).build();
             reboundRepository.save(d);
             reboundRepository.save(o);
         }
-
         Pageable pageRequest = PageRequest.of(1, 10);
+
         //when
         Page<ReboundRes> reboundsInMatch = reboundQueryRepository.findReboundsInMatch(pageRequest, match.getId());
 
         //then
-        assertThat(reboundsInMatch.getTotalPages()).isEqualTo(2);
-        assertThat(reboundsInMatch.getTotalElements()).isEqualTo(20);
+        assertThat(reboundsInMatch.getTotalPages()).isEqualTo(1);
+        assertThat(reboundsInMatch.getTotalElements()).isEqualTo(10);
     }
 
     @Test
